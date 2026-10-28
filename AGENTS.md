@@ -36,9 +36,13 @@ npm run check:ui   # drives the real UI in headless Edge via CDP, asserts no con
 
 ## Deploy (Render)
 
-Live target: **https://aaharsetu.onrender.com** (free plan, Singapore region),
-built from GitHub `main` via the blueprint in `render.yaml`.
+Code lives at **github.com/Black220202/aaharsetu-v2** (`origin`, `main`), built by
+the blueprint in `render.yaml`.
 
+- The pre-rewrite repo `Black220202/AAharSetu` is still on GitHub but no longer
+  pushed to; it is wired as remote `old` for reference. Its Render service
+  (`aaharsetu.onrender.com`) is suspended and pinned to the old code — deploy the
+  new service from `aaharsetu-v2` instead of reviving that one.
 - Deploy path: push to `main` → Render auto-deploys → `node server.js`.
 - **Free plan has no persistent disk.** `data.json` sits in the app directory and
   is wiped on every deploy/restart; the service also sleeps after 15 min idle
@@ -146,6 +150,8 @@ Render's proxy).
 - Data file is empty (`[]`) — a live board.
 - `render.yaml` is free-plan safe (no disk, `region: singapore`); deployment
   notes live under **Deploy (Render)** above.
+- Git: `origin` = `aaharsetu-v2` (current), `old` = `AAharSetu` (pre-rewrite,
+  untouched). Commit author is the repo-local `FoodRescue <foodrescue@local>`.
 
 ## Next steps / open items
 
@@ -155,6 +161,12 @@ Render's proxy).
 
 ## Recent work log
 
+- (2026-10-29) Moved the rewrite to its own repo: **Black220202/aaharsetu-v2**
+  (public, `main`, 4 commits, full history) is now `origin`; the pre-rewrite
+  `AAharSetu` is kept as remote `old`. Verified by cloning the fresh repo into a
+  temp dir, `npm install`, booting it, and checking `/`, `/app.js`, `/styles.css`,
+  `/favicon.svg` → 200 plus `/data.json`, `/server.js` → 404 on the clean clone
+  (Render's exact build path).
 - (2026-10-29) Public-hosting hardening: the static handler served any file under
   `ROOT`, so a deployed instance leaked `data.json` (live handshake codes) and
   its own source. Replaced with a `STATIC_ASSETS` allowlist; added 9 assertions
