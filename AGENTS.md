@@ -37,7 +37,12 @@ npm run check:ui   # drives the real UI in headless Edge via CDP, asserts no con
 ## Deploy (Render)
 
 Code lives at **github.com/Black220202/aaharsetu-v2** (`origin`, `main`), built by
-the blueprint in `render.yaml`.
+the blueprint in `render.yaml` as the web service **`aaharsetu-v2`**
+(`https://aaharsetu-v2.onrender.com`).
+
+- The blueprint's `name:` decides adoption: `aaharsetu-v2` creates a new service;
+  setting it back to `aaharsetu` would instead *adopt* the old suspended service
+  and repoint it at this repo.
 
 - The pre-rewrite repo `Black220202/AAharSetu` is still on GitHub but no longer
   pushed to; it is wired as remote `old` for reference. Its Render service
